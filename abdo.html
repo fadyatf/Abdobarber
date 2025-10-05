@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>حلاقة عبْدو — الحلاقة الفاخرة للرجال</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Using Vazirmatn for Arabic/Default, which still looks good for Latin text -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* New Deep Space Theme */
+    :root{
+      --bg-deep: #0e041d; /* Rich Dark Purple/Blue */
+      --bg-light: #1c0a33; /* Lighter base for gradient */
+      --accent: #00f2fe; /* Electric Cyan */
+      --secondary-accent: #ff007f; /* Contrast Magenta for pop */
+      --shadow-primary: rgba(0, 242, 254, 0.4);
+      --shadow-secondary: rgba(255, 0, 127, 0.2);
+      --card-bg: rgba(28, 10, 51, 0.85); /* Slightly translucent */
+      --muted: #c9d8ff;
+      --text-main:#ebf8ff;
+      --glass: rgba(0, 242, 254, 0.08);
+    }
+    
+    /* Keyframe for pulsing button */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 var(--shadow-primary); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+    }
+
+    /* Global Styles */
+    *{box-sizing:border-box}
+    html{scroll-behavior: smooth;}
+    html,body{height:100%}
+    body{
+      margin:0;padding:0;
+      font-family:'Vazirmatn',sans-serif;
+      background: radial-gradient(circle at top, var(--bg-light) 0%, var(--bg-deep) 100%);
+      color:var(--text-main);
+      line-height:1.6;
+      direction:rtl; /* Default direction */
+    }
+    
+    /* Ensure text alignment updates with dir */
+    html[dir="rtl"] body { text-align: right; }
+    html[dir="ltr"] body { text-align: left; }
+
+    .container{max-width:1100px;margin:30px auto;padding:20px}
+    header{
+        display:flex;align-items:center;justify-content:space-between;
+        gap:20px;padding-bottom: 10px; border-bottom: 1px solid var(--glass);
+    }
+    
+    /* Brand & Logo */
+    .brand{display:flex;align-items:center;gap:18px}
+    .logo{
+        width:80px;height:80px;border-radius:50%;
+        background:var(--accent);
+        display:flex;align-items:center;justify-content:center;
+        font-weight:900;color:var(--bg-deep);font-size:36px;
+        box-shadow: 0 0 10px var(--shadow-primary), 0 0 20px var(--shadow-primary);
+        transition: transform 0.4s ease;
+    }
+    .logo:hover { transform: rotate(5deg) scale(1.05); }
+    h1{margin:0;font-size:24px; font-weight: 900;}
+    p.lead{margin:0;color:var(--muted);font-size:16px;}
+    
+    /* Navigation */
+    .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+    nav{display:flex;gap:12px}
+    .btn, .outline{
+        padding:12px 22px;border-radius:30px;text-decoration:none;
+        font-weight:700;cursor:pointer;transition: all 0.3s ease;border: none;
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+        display: flex;
+        border: 1px solid var(--glass);
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background: var(--card-bg);
+    }
+    .lang-btn {
+        background: transparent;
+        color: var(--muted);
+        border: none;
+        padding: 8px 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 14px;
+    }
+    .lang-btn.active-lang {
+        background: var(--secondary-accent);
+        color: var(--bg-deep);
+        box-shadow: 0 0 8px var(--shadow-secondary);
+        font-weight: 700;
+    }
+    .lang-btn:hover:not(.active-lang) {
+        background: var(--glass);
+        color: var(--accent);
+    }
+
+    /* Primary Button */
+    .btn{
+        background:var(--accent);color:var(--bg-deep);
+        box-shadow: 0 0 10px var(--shadow-primary);
+    }
+    .btn:hover{
+        background: #fff;color: var(--bg-deep);
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px var(--shadow-primary);
+    }
+    .cta-pulse {
+        animation: pulse 2s infinite;
+        background: linear-gradient(45deg, var(--accent), #fff);
+    }
+
+    /* Outline Button */
+    .outline{
+        background:transparent;
+        border:2px solid var(--secondary-accent);
+        color:var(--secondary-accent);
+        box-shadow: 0 0 5px var(--shadow-secondary);
+    }
+    .outline:hover{
+        background: var(--secondary-accent);
+        color: var(--bg-deep);
+    }
+
+    /* Hero Section */
+    .hero{display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:center;margin-top:50px}
+    
+    /* Card - Floating Effect */
+    .card{
+        background:var(--card-bg);padding:35px;border-radius:25px;
+        box-shadow: 
+            0 15px 40px rgba(0,0,0,0.6), 
+            0 0 20px var(--shadow-secondary), 
+            0 0 5px var(--shadow-primary); 
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 242, 254, 0.4);
+    }
+
+    /* Titles - Gradient and Border */
+    .hero h2{
+        font-size:48px;margin:0 0 15px;
+        background: linear-gradient(90deg, var(--accent), #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 10px var(--shadow-primary);
+        font-weight: 900;
+    }
+    .hero p{margin:0 0 25px;color:var(--muted);font-size:18px;}
+    
+    /* Services */
+    .services-title {
+        color: var(--secondary-accent); 
+        font-weight: 900; 
+        border-bottom: 2px dashed var(--glass); 
+        padding-bottom: 8px;
+    }
+    .services{display:flex;gap:15px;flex-wrap:wrap;margin-top:10px;}
+    .service{
+        background:var(--glass);padding:12px 20px;border-radius:15px;
+        color:var(--accent);font-weight:600;
+        border: 1px solid rgba(0, 242, 254, 0.2);
+        transition: all 0.3s ease;cursor: default;
+    }
+    .service:hover{
+        background: var(--accent);color: var(--bg-deep);
+        transform: scale(1.05);box-shadow: 0 0 15px var(--shadow-primary);
+    }
+
+    /* Contact Details */
+    .contact .phone{font-size:32px;font-weight:900;color:var(--accent);text-shadow: 0 0 10px var(--shadow-primary);}
+    .contact .cta{gap:15px}
+    .cta a{border-radius:15px;}
+    .call{
+        background:transparent;border:2px solid var(--muted);
+        color:var(--muted);box-shadow: none;
+    }
+    .call:hover{
+        background:var(--muted);color:var(--bg-deep);
+        transform: translateY(-2px);
+    }
+    .wh{
+        background:#25D366;color:#042018;border: 2px solid #25D366;
+    }
+    .wh:hover{
+        background:#128c7e;color:#fff;transform: translateY(-2px);
+    }
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+    .gallery-title {
+        color: var(--secondary-accent); 
+        font-size: 28px; 
+        font-weight: 900; 
+        border-bottom: 3px solid var(--accent); 
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .photo img{
+        width:100%;height:320px;object-fit:cover;border-radius:18px;
+        transition: all 0.4s ease;border: 5px solid var(--bg-light);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+    }
+    .photo img:hover{
+        transform: scale(1.08) rotate(1deg);opacity: 0.95;
+        border: 5px solid var(--accent);
+        box-shadow: 0 0 25px var(--shadow-primary), 0 0 10px var(--shadow-secondary);
+    }
+
+    /* Footer */
+    footer{margin-top:50px;padding-top:25px;border-top: 1px solid var(--glass);}
+    footer a {color:var(--secondary-accent) !important; text-shadow: 0 0 5px var(--shadow-secondary);}
+
+
+    /* Custom Toast Message for Copy Success */
+    .toast {
+      visibility: hidden;min-width: 250px;
+      margin-right: -125px;background-color: #333;color: #fff;
+      text-align: center;border-radius: 10px;padding: 16px;
+      position: fixed;z-index: 1000;left: 50%;bottom: 30px;
+      font-size: 17px;box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+    .toast.show {
+      visibility: visible;-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @-webkit-keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+    @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+    @-webkit-keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+    /* Media Queries */
+    @media (max-width:880px){
+        .hero{grid-template-columns:1fr;}
+        .gallery{grid-template-columns:repeat(2,1fr)}
+        .logo{width:65px;height:65px;font-size:30px}
+        header{flex-direction: column; align-items: flex-start; gap: 15px;}
+        .nav-wrapper {width: 100%; justify-content: space-between;}
+        nav{width: auto;}
+        .hero h2{font-size: 38px;}
+    }
+    @media (max-width:420px){
+        .gallery{grid-template-columns:1fr}
+        .container{margin:12px;padding:14px}
+        .hero h2{font-size:28px; border-bottom: none;}
+        .cta a{padding: 10px 8px; font-size: 14px;}
+        .btn, .outline {padding: 8px 14px;}
+        nav{gap: 8px;}
+        .photo img{height: 250px;}
+        .lang-btn { padding: 6px 10px; font-size: 13px; }
+    }
+  </style>
+  <script>
+    const PHONE_NUMBER = '212707636429';
+
+    const translations = {
+      'ar': {
+        'header-title': 'حلاقة عبْدو <span style="color:var(--accent); font-weight: 900;">الفاخرة</span>',
+        'header-lead': 'تجربة حلاقة تليق بك — دقة، نظافة، وتميز في كل تفصيلة.',
+        'nav-services': 'الخدمات',
+        'nav-gallery': 'المعرض',
+        'nav-book': 'احجز موعدك',
+        'hero-heading': 'اكتشف مستوى جديداً من الأناقة.',
+        'hero-text': 'نحن لا نقدم مجرد قصة شعر، بل تجربة متكاملة تبدأ من لحظة دخولك. خبراء في أحدث قصات الموضة العالمية، وتصفيف اللحية بدقة متناهية.',
+        'services-title': 'خدماتنا المميزة بلمسة احترافية',
+        's-1': '✂️ قَصّات حادة (Fade & Taper)',
+        's-2': '🧔 تصفيف اللحية وتهذيبها بالباخرة',
+        's-3': '👁️‍🗨️ تنظيف وإزالة شعر الوجه بالخيط',
+        's-4': '🔥 تمليس وتصفيف الشعر',
+        's-5': '🤵 خدمة VIP للعرسان',
+        's-6': '💎 تنظيف بشرة عميق وقناع',
+        'hours-text': 'ساعات العمل: من 9 صباحًا حتى 9 مساءً. <strong>مواعيد خاصة متاحة عند الطلب</strong>.',
+        'contact-title': 'للحجز والاستفسار الفوري',
+        'btn-copy': '📋 نسخ الرقم',
+        'btn-wa': '🟢 مراسلة واتساب',
+        'address-text': 'العنوان: شارع الحلاقة الفاخرة، قرب السوق (سنشارك الموقع الدقيق عند الحجز)',
+        'gallery-title': 'أعمالنا: حيث يلتقي الفن بالأناقة',
+        'gallery-text': 'شاهد مستوى الدقة والاحترافية. انقر على الصورة لرؤية التفاصيل.',
+        'footer-copy': '© جميع الحقوق محفوظة — حلاقة عبْدو | تصميم فاخر 2024',
+        'footer-phone': 'الهاتف:',
+        'footer-wa': 'واتساب: ابدأ المحادثة',
+        'toast-copy': '✅ تم نسخ رقم الهاتف!',
+        'wa-message': 'مرحبا، أريد أن أحجز موعداً في صالون حلاقة عبْدو.',
+      },
+      'en': {
+        'header-title': 'Abdo\'s <span style="color:var(--accent); font-weight: 900;">Luxury</span> Barber Shop',
+        'header-lead': 'A distinguished shaving experience—precision, cleanliness, and excellence in every detail.',
+        'nav-services': 'Services',
+        'nav-gallery': 'Gallery',
+        'nav-book': 'Book Now',
+        'hero-heading': 'Discover a New Level of Elegance.',
+        'hero-text': 'We don\'t just offer a haircut; we provide a complete experience starting the moment you walk in. Experts in the latest international fashion cuts and meticulous beard styling.',
+        'services-title': 'Our Unique Professional Services',
+        's-1': '✂️ Sharp Cuts (Fade & Taper)',
+        's-2': '🧔 Beard Styling & Steaming',
+        's-3': '👁️‍🗨️ Face Hair Removal (Threading)',
+        's-4': '🔥 Hair Straightening & Styling',
+        's-5': '🤵 VIP Service for Grooms',
+        's-6': '💎 Deep Facial Cleansing & Mask',
+        'hours-text': 'Working Hours: 9 AM to 9 PM. <strong>Special appointments available upon request</strong>.',
+        'contact-title': 'For Immediate Booking & Inquiries',
+        'btn-copy': '📋 Copy Number',
+        'btn-wa': '🟢 WhatsApp Chat',
+        'address-text': 'Address: Luxury Barber Street, near the Market (Exact location shared upon booking)',
+        'gallery-title': 'Our Work: Where Art Meets Elegance',
+        'gallery-text': 'See the level of precision and professionalism. Click the image for details.',
+        'footer-copy': '© All rights reserved — Abdo\'s Luxury Barber Shop | Premium Design 2024',
+        'footer-phone': 'Phone:',
+        'footer-wa': 'WhatsApp: Start Chat',
+        'toast-copy': '✅ Phone number copied!',
+        'wa-message': 'Hello, I would like to book an appointment at Abdo\'s Barber Shop.',
+      },
+      'fr': {
+        'header-title': 'Salon de Coiffure <span style="color:var(--accent); font-weight: 900;">de Luxe</span> Abdo',
+        'header-lead': 'Une expérience de rasage distinguée : précision, propreté et excellence dans chaque détail.',
+        'nav-services': 'Services',
+        'nav-gallery': 'Galerie',
+        'nav-book': 'Réserver',
+        'hero-heading': 'Découvrez un nouveau niveau d\'élégance.',
+        'hero-text': 'Nous n\'offrons pas seulement une coupe de cheveux ; nous vous proposons une expérience complète dès l\'instant où vous entrez. Experts des dernières coupes de mode et du coiffage minutieux de la barbe.',
+        'services-title': 'Nos Services Professionnels Uniques',
+        's-1': '✂️ Coupes Dégradées (Fade & Taper)',
+        's-2': '🧔 Coiffage et Soin de la Barbe à la Vapeur',
+        's-3': '👁️️ Epilation du Visage au Fil',
+        's-4': '🔥 Lissage et Coiffure',
+        's-5': '🤵 Service VIP pour les Mariés',
+        's-6': '💎 Nettoyage Profond du Visage & Masque',
+        'hours-text': 'Heures d\'ouverture : 9h00 à 21h00. <strong>Rendez-vous spéciaux disponibles sur demande</strong>.',
+        'contact-title': 'Pour Réservation et Questions Immédiates',
+        'btn-copy': '📋 Copier le Numéro',
+        'btn-wa': '🟢 Chat WhatsApp',
+        'address-text': 'Adresse : Rue du Barbier de Luxe, près du Marché (L\'emplacement exact est partagé lors de la réservation)',
+        'gallery-title': 'Nos Œuvres : Quand l\'Art Rencontre l\'Élégance',
+        'gallery-text': 'Voyez le niveau de précision et de professionnalisme. Cliquez sur l\'image pour les détails.',
+        'footer-copy': '© Tous droits réservés — Salon de Coiffure Abdo | Design Premium 2024',
+        'footer-phone': 'Téléphone:',
+        'footer-wa': 'WhatsApp: Démarrer la Conversation',
+        'toast-copy': '✅ Numéro de téléphone copié !',
+        'wa-message': 'Bonjour, j\'aimerais prendre rendez-vous au Salon de Coiffure Abdo.',
+      }
+    };
+
+    let currentLang = 'ar';
+
+    function showToast(message) {
+      const toast = document.getElementById("toast-message");
+      toast.textContent = message;
+      toast.className = "toast show";
+      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+    }
+
+    function copyNumber(){
+      // Using execCommand for wider iframe compatibility
+      document.execCommand('copy', false, '+' + PHONE_NUMBER);
+      const message = translations[currentLang]['toast-copy'];
+      showToast(message);
+    }
+    
+    function changeLanguage(lang) {
+      currentLang = lang;
+      const langData = translations[lang];
+      const htmlElement = document.documentElement;
+      const waLinkBtn = document.getElementById('btn-wa');
+
+      // 1. Change direction and language attribute on HTML
+      const direction = (lang === 'ar' ? 'rtl' : 'ltr');
+      htmlElement.setAttribute('dir', direction);
+      htmlElement.setAttribute('lang', lang);
+      
+      // 2. Update all translatable elements via their IDs
+      for (const id in langData) {
+        const element = document.getElementById(id);
+        if (element && id !== 'wa-message') { // Skip wa-message as it's for the URL only
+          element.innerHTML = langData[id]; 
+        }
+      }
+
+      // 3. Update the WhatsApp URL with the correct language message
+      if (waLinkBtn && langData['wa-message']) {
+          const encodedMessage = encodeURIComponent(langData['wa-message']);
+          waLinkBtn.href = `https://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${encodedMessage}`;
+      }
+      
+      // 4. Update active language button styles
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('active-lang');
+        } else {
+          btn.classList.remove('active-lang');
+        }
+      });
+      
+      // 5. Update the WhatsApp footer link text (needs special handling as it's outside the main translation loop)
+      const waLink = document.getElementById('footer-wa-link');
+      if (waLink) {
+          if (lang === 'ar') {
+             waLink.textContent = 'ابدأ المحادثة';
+          } else if (lang === 'en') {
+             waLink.textContent = 'Start Chat';
+          } else if (lang === 'fr') {
+             waLink.textContent = 'Démarrer la Conversation';
+          }
+      }
+    }
+
+    // Initialize with Arabic content on load
+    window.onload = function() {
+        changeLanguage('ar'); 
+    };
+
+  </script>
+</head>
+<body>
+  <div id="toast-message" class="toast"></div>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">ع</div>
+        <div>
+          <h1 id="header-title">حلاقة عبْدو <span style="color:var(--accent); font-weight: 900;">الفاخرة</span></h1>
+          <p class="lead" id="header-lead">تجربة حلاقة تليق بك — دقة، نظافة، وتميز في كل تفصيلة.</p>
+        </div>
+      </div>
+      <div class="nav-wrapper">
+        <!-- Language Switcher now includes French -->
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang="ar" onclick="changeLanguage('ar')">العربية</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">English</button>
+            <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')">Français</button>
+        </div>
+        <nav>
+          <a class="outline" href="#services" id="nav-services">الخدمات</a>
+          <a class="outline" href="#gallery" id="nav-gallery">المعرض</a>
+          <a class="btn cta-pulse" href="#contact" id="nav-book">احجز موعدك</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h2 id="hero-heading">اكتشف مستوى جديداً من الأناقة.</h2>
+        <p id="hero-text">نحن لا نقدم مجرد قصة شعر، بل تجربة متكاملة تبدأ من لحظة دخولك. خبراء في أحدث قصات الموضة العالمية، وتصفيف اللحية بدقة متناهية.</p>
+        
+        <div id="services" style="margin-top:20px">
+          <h3 class="services-title" id="services-title">خدماتنا المميزة بلمسة احترافية</h3>
+          <div class="services">
+            <div class="service" id="s-1">✂️ قَصّات حادة (Fade & Taper)</div>
+            <div class="service" id="s-2">🧔 تصفيف اللحية وتهذيبها بالباخرة</div>
+            <div class="service" id="s-3">👁️‍🗨️ تنظيف وإزالة شعر الوجه بالخيط</div>
+            <div class="service" id="s-4">🔥 تمليس وتصفيف الشعر</div>
+            <div class="service" id="s-5">🤵 خدمة VIP للعرسان</div>
+            <div class="service" id="s-6">💎 تنظيف بشرة عميق وقناع</div>
+          </div>
+        </div>
+        <div style="margin-top:30px;color:var(--muted); font-size: 16px;">
+            <span id="hours-text"><strong>ساعات العمل:</strong> من 9 صباحًا حتى 9 مساءً. <strong>مواعيد خاصة متاحة عند الطلب</strong>.</span>
+        </div>
+      </div>
+
+      <aside class="card contact" id="contact">
+        <div style="text-align: center;">
+          <div style="font-size:18px;color:var(--muted); font-weight: 700;" id="contact-title">للحجز والاستفسار الفوري</div>
+          <div class="phone">0707-636-429</div>
+        </div>
+        <div class="cta">
+          <a class="call" onclick="copyNumber()" id="btn-copy">📋 نسخ الرقم</a>
+          <!-- The href is now set dynamically in changeLanguage() to ensure the message text is translated -->
+          <a class="wh" href="#" target="_blank" rel="noopener" id="btn-wa">🟢 مراسلة واتساب</a> 
+        </div>
+        <div style="font-size:14px;color:var(--muted);margin-top:10px; text-align: center;">
+            <span id="address-text">العنوان: شارع الحلاقة الفاخرة، قرب السوق (سنشارك الموقع الدقيق عند الحجز)</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="gallery" class="card" style="margin-top:40px">
+      <h3 class="gallery-title" id="gallery-title">أعمالنا: حيث يلتقي الفن بالأناقة</h3>
+      <div class="gallery">
+        <!-- Images remain placeholders, ensuring they are high-quality -->
+        <div class="photo"><img src="https://images.pexels.com/photos/2068672/pexels-photo-2068672.jpeg" alt="Fade Cut"></div>
+        <div class="photo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLvh1FM4EuiMFeKev3W_9X39DNDAqj282mNMmX_v62F7cggZbe82RwDfB5lDqFk_MCCOY&usqp=CAU" alt="Beard Trim"></div>
+        <div class="photo"><img src="https://media.istockphoto.com/id/872361244/photo/man-getting-his-beard-trimmed-with-electric-razor.jpg?s=612x612&w=0&k=20&c=_IjZcrY0Gp-2z6AWTQederZCA9BLdl-iqWkH0hGMTgg=" alt="Classic Haircut"></div>
+      </div>
+      <p style="margin-top:20px;color:var(--muted);font-size:14px; text-align: center;" id="gallery-text">شاهد مستوى الدقة والاحترافية. انقر على الصورة لرؤية التفاصيل.</p>
+    </section>
+
+    <footer>
+      <div id="footer-copy">© جميع الحقوق محفوظة — حلاقة عبْدو | تصميم فاخر </div>
+      <div style="margin-top:6px;color:var(--muted);font-size:13px">
+        <span id="footer-phone">الهاتف:</span> <a href="tel:+212707636429" style="color:inherit;text-decoration:underline">+212707636429</a> — 
+        <span id="footer-wa">واتساب:</span> <a id="footer-wa-link" href="https://api.whatsapp.com/send?phone=212707636429" style="color:inherit;text-decoration:underline" target="_blank" rel="noopener">ابدأ المحادثة</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
